@@ -51,12 +51,9 @@ class TeamController extends AbstractController
                 ->setTo('contact@gameher.fr')
                 ->setBody($data['message']);
 
-            try {
-                $mailer->send($message);
-                $this->addFlash('success', 'message sent');
-            } catch(\Swift_TransportException $e) {
-                $this->addFlash('danger', 'message could not be sent');
-            }
+            $mailer->send($message);
+
+            $this->addFlash('success', 'message sent');
         }
 
         if ($form->isSubmitted() && !$form->isValid()) {
